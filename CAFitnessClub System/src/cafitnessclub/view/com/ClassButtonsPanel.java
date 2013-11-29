@@ -19,12 +19,16 @@ public class ClassButtonsPanel extends JPanel {
     private JRadioButton instructorRadioBtn;
     private JRadioButton roomRadioBtn;
     private JLabel viewScheduleLabel;
+    private JButton refreshButton;
+    private ClassesPanel classesPanel;
 
     public ClassButtonsPanel() {
         initComponents();
     }
 
     private void initComponents() {
+    	
+    	classesPanel = new ClassesPanel();
 
         addClassButton = new JButton();
         	addClassButton.setText("Add a Class");
@@ -37,6 +41,8 @@ public class ClassButtonsPanel extends JPanel {
         buttonGroup1 = new ButtonGroup();
 	        buttonGroup1.add(instructorRadioBtn);
 	        buttonGroup1.add(roomRadioBtn);
+	    refreshButton = new JButton();
+	    	refreshButton.setText("Refresh");
         	
       // ACTION LISTENERS
         	addClassButton.addActionListener(new ActionListener() {
@@ -51,40 +57,51 @@ public class ClassButtonsPanel extends JPanel {
 					}                    
                 }
             });
+        	refreshButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                     if (instructorRadioBtn.isSelected())
+                    	 System.out.println();
+                     else if (roomRadioBtn.isSelected())
+                    	 System.out.println();
+                }
+            });
       // END ACTION LISTENERS
         	
         	
       // ADD ALL COMPONENTS
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(addClassButton)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
-                .addComponent(viewScheduleLabel)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(instructorRadioBtn)
-                    .addComponent(roomRadioBtn))
-                .addGap(159, 159, 159))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(addClassButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+        	javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+            this.setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(124, 124, 124)
+                    .addComponent(addClassButton)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+                    .addComponent(viewScheduleLabel)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(instructorRadioBtn)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(roomRadioBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(viewScheduleLabel)))
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
+                    .addGap(18, 18, 18)
+                    .addComponent(refreshButton)
+                    .addGap(68, 68, 68))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(addClassButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(instructorRadioBtn)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(roomRadioBtn))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(13, 13, 13)
+                            .addComponent(viewScheduleLabel))
+                        .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(31, Short.MAX_VALUE))
+            );
       // END ADD ALL COMPONENTS
     }
 }

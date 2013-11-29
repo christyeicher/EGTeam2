@@ -57,16 +57,17 @@ public class Instructors {
 		private static Instructor[] returnInstructors(ResultSet rs) throws SQLException
 		{
 			Instructor[] instructors = new Instructor[50];
+			int i = 0;
 			while(rs.next())
-			{				
-				int i = 0;
+			{					
 				Instructor instructor = new Instructor(
 						rs.getInt("instructorID"),
 						rs.getString("name"),
 						rs.getString("email"),
 						rs.getString("address"));
 				
-				instructors[i++] = instructor;
+				instructors[i] = instructor;
+				i++;
 			}
 			return instructors;
 		}
@@ -75,7 +76,7 @@ public class Instructors {
 			   Statement st = null;
 			   ResultSet rs = null;
 			   String sqlQuery =
-					   "SELECT name from Instructor";
+					   "SELECT * from Instructor";
 			   
 			   st = Database.getConnection().prepareStatement(sqlQuery);
 			   rs = st.executeQuery(sqlQuery);

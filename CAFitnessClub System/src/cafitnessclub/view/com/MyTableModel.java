@@ -17,8 +17,22 @@ class MyTableModel extends AbstractTableModel {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-		}
-		
+		}		
+	}
+	
+	public void resetClasses(int value){
+		if (value == 1)
+			try {
+				classes = Classes.getClassesByInstructor();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		else if (value == 2)
+			try {
+				classes = Classes.getClassesByRoom();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 	
 	@Override
@@ -31,7 +45,7 @@ class MyTableModel extends AbstractTableModel {
         case 4:  return "Room";                 
         case 5:  return "Instructor";                 
         default: return "null Value";                 
-		}		
+		}
 	}
 	
 	@Override

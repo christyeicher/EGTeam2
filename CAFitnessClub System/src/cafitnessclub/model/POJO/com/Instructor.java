@@ -53,10 +53,15 @@ public class Instructor {
 		this.address = address;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Name: " + name	+ "\nEmail: "
+//				+ email + "\nAddress: " + address;
+//	}
+	
 	@Override
 	public String toString() {
-		return "Name: " + name	+ "\nEmail: "
-				+ email + "\nAddress: " + address;
+		return name + " ";
 	}
 	
 	public boolean instructorCheck()

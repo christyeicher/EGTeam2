@@ -72,11 +72,11 @@ public class HomeFrame extends JFrame {
         
       // TAB PANE DECLARATIONS
         JTabbedPane tabbedPane = new JTabbedPane();
-        ImageIcon icon = createImageIcon("images/middle.gif");
+        ImageIcon icon = createImageIcon("res/FitnessClubLogo.gif");
 
         JComponent classesPanel = new JPanel(new BorderLayout()); //makeTextPanel("Panel #1");
         	classesPanel.add(new ClassButtonsPanel(), BorderLayout.NORTH);
-        	classesPanel.add(new ClassesPanel(), BorderLayout.CENTER);
+        	//classesPanel.add(new ClassesPanel(), BorderLayout.CENTER);
         tabbedPane.addTab("Classes", icon, classesPanel, "Currently offered classes");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 

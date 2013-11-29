@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -80,13 +81,13 @@ public class AddClassDialog extends JDialog {
         	
         	
         instructorCombo = new JComboBox();
-        	//Instructor[] instructors = Instructors.getAllInstructors();
-        	//instructorCombo.setModel(new DefaultComboBoxModel(instructors));
-        	instructorCombo.setModel(new DefaultComboBoxModel(new String[] { 
+        	Instructor[] instructors = Instructors.getAllInstructors();
+        	instructorCombo.setModel(new DefaultComboBoxModel(instructors));
+        	/*instructorCombo.setModel(new DefaultComboBoxModel(new String[] { 
         			"Choose Instructor...", "Adam Sewell", "Andy Nguyen", "Chuck Norris", 
         			"Danielle Valley", "Jacque Cousteau", "Jennifer Lopez", "Jennifer Prugh", 
         			"LeBron James", "Lindsey Morrone", "Lorien Neargarder", "Mark Tanaka", 
-        			"Michael Phelps", "Serena Williams", "Shareef Johnson", "Vanessa Vortex" }));
+        			"Michael Phelps", "Serena Williams", "Shareef Johnson", "Vanessa Vortex" }));*/
         	
         	
         roomCombo = new JComboBox();

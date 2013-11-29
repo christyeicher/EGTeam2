@@ -26,18 +26,5 @@ public class ClassesTable extends JTable {
 		this.setSize(new Dimension(450, 400));
 		
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
-		
-//		this.addMouseListener(new MouseAdapter(){
-//        	public void mouseClicked(MouseEvent e) {
-//                int row = this.rowAtPoint(e.getPoint());
-//                int column = this.columnAtPoint(e.getPoint());
-//                if (row >= 0 && column >= 0) {
-//                    dialog.setVisible(true);
-//                }
-//            }
-//        	
-//        });
 	}
-	
-	
 }
