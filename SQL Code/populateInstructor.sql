@@ -1,0 +1,15 @@
+insert into CAFitnessClub.Instructor(name, email, address) values ('Lorien Neargarder', 'lorienneargarder@gmail.com', '123 Lorien Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Danielle Valley', 'danielle@gmail.com', '123 Danielle Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Adam Sewell', 'adam@gmail.com', '123 Adam Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Jennifer Prugh', 'jennifer@gmail.com', '123 Jennifer Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Vanessa Vortex', 'vanessa@gmail.com', '123 Vanessa Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Lindsey Morrone', 'lindsey@gmail.com', '123 Lindsey Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Jennifer Lopez', 'jenniferlopez@gmail.com', '123 JenniferLopez Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Chuck Norris', 'chuck@gmail.com', '123 Chuck Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Shareef Johnson', 'shareef@gmail.com', '123 Shareef Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Andy Nguyen', 'andy@gmail.com', '123 Andy Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Jacque Cousteau', 'jacque@gmail.com', '123 Jacque Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Mark Tanaka', 'mark@gmail.com', '123 Mark Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('Michael Phelps', 'michael@gmail.com', '123 Michael Way');
+insert into CAFitnessClub.Instructor(name, email, address) values ('LeBron James', 'lebron@gmail.com', '123 Lebron Way');
+insert into cafitnessclub.Instructor(name, email, address) values ('Serena Williams', 'serena@gmail.com', '123 Serena Way');

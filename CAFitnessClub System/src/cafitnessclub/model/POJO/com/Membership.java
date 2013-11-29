@@ -6,16 +6,24 @@ public class Membership {
 	private int msID;
 	private int memberID;
 	private String membershipType;
-	private Date expiration;
+	private String expiration;
 	private int cost;
 	private int numClassesAllowed;	
 	
 	public Membership(int msID, int memberID, String membershipType,
-			Date expiration, int cost, int numClassesAllowed) {
+			String expiration, int cost, int numClassesAllowed) {
 		this.msID = msID;
 		this.memberID = memberID;
 		this.membershipType = membershipType;
 		this.expiration = expiration;
+		this.cost = cost;
+		this.numClassesAllowed = numClassesAllowed;
+	}
+	public Membership(int memberID, String membershipType,
+			int cost, int numClassesAllowed) {
+		
+		this.memberID = memberID;
+		this.membershipType = membershipType;
 		this.cost = cost;
 		this.numClassesAllowed = numClassesAllowed;
 	}
@@ -37,10 +45,10 @@ public class Membership {
 	public void setMembershipType(String membershipType) {
 		this.membershipType = membershipType;
 	}
-	public Date getExpiration() {
+	public String getExpiration() {
 		return expiration;
 	}
-	public void setExpiration(Date expiration) {
+	public void setExpiration(String expiration) {
 		this.expiration = expiration;
 	}
 	public int getCost() {
@@ -57,10 +65,11 @@ public class Membership {
 	}
 	@Override
 	public String toString() {
-		return "Membership [msID=" + msID + ", memberID=" + memberID
-				+ ", membershipType=" + membershipType + ", expiration="
-				+ expiration + ", cost=" + cost + ", numClassesAllowed="
-				+ numClassesAllowed + "]";
+		return "Membership ID =" + msID + ", \n"
+				+ "member ID =" + memberID
+				+ ", \n Membership Type =" + membershipType + ",\n Expiration ="
+				+ expiration + ", \n cost =" + cost + ", \n Number Of Classes Left ="
+				+ numClassesAllowed;
 	}
 	
 	

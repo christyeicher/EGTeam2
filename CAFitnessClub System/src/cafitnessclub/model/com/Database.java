@@ -12,7 +12,7 @@ public class Database {
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	   static final String DB_URL = "jdbc:mysql://localhost/";
 	   //  Database credentials
-	   static final String USER = "demo";
+	   static final String USER = "root";
 	   static final String PASS = "passwort";
 	   private static Connection conn = null;
 
@@ -22,7 +22,7 @@ public class Database {
 	    	  if (conn == null)
 		      {
 		         Class.forName(JDBC_DRIVER); //Register JDBC Driver
-		         conn = DriverManager.getConnection(DB_URL + "CAFitnessClub", USER, PASS);
+		         conn = DriverManager.getConnection(DB_URL + "CAFitnessClub", USER, null);
 		      }
 	      }catch(ClassNotFoundException e)
 	      {

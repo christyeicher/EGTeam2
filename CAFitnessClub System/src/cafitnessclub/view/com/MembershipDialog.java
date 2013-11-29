@@ -2,17 +2,22 @@ package cafitnessclub.view.com;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
 import cafitnessclub.model.POJO.com.Member;
+import cafitnessclub.model.POJO.com.Membership;
+import cafitnessclub.model.com.Members;
+import cafitnessclub.model.com.Memberships;
 
 public class MembershipDialog extends JDialog {
 		
@@ -21,12 +26,20 @@ public class MembershipDialog extends JDialog {
     private JComboBox membershipDropDown;
     private JButton okButton;
     private Member member;
+    private boolean edit = false;
 
     public MembershipDialog(String title, Member member) {
         setTitle(title);
         initComponents();
         setLocationRelativeTo(null);
         this.member = member;
+    }
+    public MembershipDialog(String title, Member member, boolean edit) {
+        setTitle(title);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.member = member;
+        this.edit = edit;
     }
 
     private void initComponents() {
@@ -44,9 +57,82 @@ public class MembershipDialog extends JDialog {
       // ACTION LISTENERS
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	//member.setMembership(membership);
+            	if(!edit){
+            	String membershipType = (String)membershipDropDown.getSelectedItem();
+            	switch(membershipType){
+            	case "Annual Unlimited (AU)": 
+            		try {
+						Memberships.insertMembership(new Membership(member.getMemberID(), "AU", 1500, 
+	            				0));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            		break;
+            	case "Monthly Unlimited (MU)": 
+            		try {
+						Memberships.insertMembership(new Membership(member.getMemberID(), "MU", 150, 
+	            				0));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            		break;
+            	case "Monthly Choose 5 (MC)":
+            		try {
+						Memberships.insertMembership(new Membership(member.getMemberID(), "MC", 80, 
+	            				0));
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            		break;
+            	}
+            	
+            	dispose();
+            }else
+            {
+            	String membershipType = (String)membershipDropDown.getSelectedItem();
+            	switch(membershipType){
+            	case "Annual Unlimited (AU)": 
+            		try {
+            			Membership membership = member.getMembership();
+            			membership.setMembershipType("AU");
+            			membership.setCost(1500);
+						Memberships.updateMembership(membership);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            		break;
+            	case "Monthly Unlimited (MU)": 
+            		try {
+            			Membership membership = member.getMembership();
+            			membership.setMembershipType("MU");
+            			membership.setCost(150);
+						Memberships.updateMembership(membership);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            		break;
+            	case "Monthly Choose 5 (MC)":
+            		try {
+            			Membership membership = member.getMembership();
+            			membership.setMembershipType("MC");
+            			membership.setCost(80);
+						Memberships.updateMembership(membership);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            		break;
+            	}
+            	
             	dispose();
             }
+            
+           }
         });
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -94,4 +180,5 @@ public class MembershipDialog extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         pack();
     }
+
 }

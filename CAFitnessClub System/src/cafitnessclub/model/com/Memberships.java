@@ -3,6 +3,7 @@ package cafitnessclub.model.com;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 import cafitnessclub.model.POJO.com.Member;
 import cafitnessclub.model.POJO.com.Membership;
@@ -16,9 +17,9 @@ public class Memberships {
 			{
 				Membership membership = new Membership(
 						rs.getInt("msID"),
-						rs.getInt("memberID"),
+						rs.getInt("m_memberID"),
 						rs.getString("membershipType"),
-						rs.getDate("expiration"),
+						rs.getDate("experation").toString(),
 						rs.getInt("cost"),
 						rs.getInt("numClassesAllowed"));
 				return membership;
@@ -29,18 +30,19 @@ public class Memberships {
 		public static void insertMembership(Membership membership) throws SQLException
 		{
 			 PreparedStatement st = null;
-			 ResultSet rs = null;
+			 //boolean rs = null;
 			 String sqlQuery =
-					   "INSERT INTO Membership (memberID, membershipType, expiration, "
+					   "INSERT INTO Membership (m_memberID, membershipType, experation, "
 					   + "cost, numClassesAllowed) values (?, ?, ?, ?, ?)";
-			   
+			 Date date = new Date(System.currentTimeMillis());
 			 st = Database.getConnection().prepareStatement(sqlQuery);
 			 st.setInt(1, membership.getMemberID());
 			 st.setString(2, membership.getMembershipType());
-			 st.setDate(3, membership.getExpiration());
+			 st.setDate(3,date);
 			 st.setInt(4, membership.getCost());
 			 st.setInt(5, membership.getNumClassesAllowed());
-			 rs = st.executeQuery();
+			 //rs = st.execute();
+			 st.execute();
 			
 		}
 		
@@ -73,29 +75,21 @@ public class Memberships {
 		   }
 		 
 		   // Update Queries
-		   public static void updateMember(Member member) throws SQLException
+		   public static void updateMembership(Membership membership) throws SQLException
 		   {
 		         PreparedStatement stmt = null;
 		         String updateString =
-		            "UPDATE Member SET name = ?, password = ?, "
-		                 + "PIN = ?, email = ?, address = ?";
+		            "UPDATE Membership SET membershipType = ?, experation = ?, "
+		                 + "cost = ? where m_memberID = ?";
 		            // update record
+		         Date date = new Date(System.currentTimeMillis());
 		            stmt = Database.getConnection().prepareStatement(updateString);
-		            stmt.setString(1, member.getName());
-		            stmt.setString(2, member.getPassword());
-		            stmt.setInt(3, member.getPIN());
-		            stmt.setString(4, member.getEmail());
-		            stmt.setString(5, member.getAddress());
+		            stmt.setString(1, membership.getMembershipType());
+		            stmt.setDate(2, date);
+		            stmt.setInt(3, membership.getCost());
+		            stmt.setInt(4, membership.getMemberID());
 		            stmt.execute();
-		         
-//		         } finally {
-//		            try {
-//		               if (stmt != null)
-//		                  stmt.close();
-//		            } catch (SQLException se) {
-//		               se.printStackTrace();
-//		            }
-//		         }
+
 		      }
 
 }

@@ -99,13 +99,17 @@ public class SearchMemberPanel extends JPanel {
       // ACTION LISTENERS
         	signupMemberBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                	if(member != null){
                     MembershipDialog membershipDialog = new MembershipDialog("Sign Up Member for Membership", member);
                     membershipDialog.setVisible(true);
+                	}else{
+                		memberTextArea.setText("Please search for a member first by using email");
+                	}
                 }
             });
         	editMembershipBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                	MembershipDialog membershipDialog = new MembershipDialog("Edit Membership", member);
+                	MembershipDialog membershipDialog = new MembershipDialog("Edit Membership", member, true);
                     membershipDialog.setVisible(true);
                 }
             });
@@ -307,5 +311,5 @@ public class SearchMemberPanel extends JPanel {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
       // END ADD ALL COMPONENTS
-    }                                                                   
+    }
 }
