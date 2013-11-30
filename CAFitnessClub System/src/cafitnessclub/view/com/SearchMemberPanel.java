@@ -99,56 +99,55 @@ public class SearchMemberPanel extends JPanel {
       // ACTION LISTENERS
         	signupMemberBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                	
                 	if(member != null){
                     MembershipDialog membershipDialog = new MembershipDialog("Sign Up Member for Membership", member);
                     membershipDialog.setVisible(true);
                 	}else{
-                		memberTextArea.setText("Please search for a member first by using email");
+                		
+                    		String message = "Please Search for a member first!";
+                    		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+                    		return;
+                    	
                 	}
                 }
             });
         	editMembershipBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                	if(member == null) {
+                		String message = "Please Search for a member first!";
+                		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+                		return;
+                	}
                 	MembershipDialog membershipDialog = new MembershipDialog("Edit Membership", member, true);
                     membershipDialog.setVisible(true);
                 }
             });
             editMemberBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                	try {
-		                	String name = nameTextField.getText();
-		                	String email = formEmailTextField.getText();
-		                	int pin = Integer.parseInt(pinTextField.getText());
-		                	String password = passwordTextField.getText();
-		                	String address = addressTextField.getText();
-		                	if(email == null){
-		                		memberTextArea.setText("You must enter Email to update!");
-		                		return;                		
-		                	}
-		                	if(member == null){
-		                		memberTextArea.setText("Search for Member First!");
-		                		return;
-		                	}
-		                	// edit current member
-		                	member.setName(name);
-		                	member.setEmail(email);
-		                	member.setAddress(address);
-		                	member.setPIN(pin);
-		                	member.setPassword(password);	                	
-		            		Members.updateMember(member);
-            		} catch (SQLException e) {
-            			e.printStackTrace();
-            		} catch(NumberFormatException e){
-            			memberTextArea.setText("Search for Member First!");
-            		}
+                	if(member == null) {
+                		String message = "Please Search for a member first!";
+                		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+                		return;
+                	}
+                	EditMemberDialog editMemberDialog = new EditMemberDialog("Edit Member", member);
+                	editMemberDialog.setVisible(true);
+                	
                 }
             });
             deleteMemberBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                	if(member == null) {
+                		String message = "Please Search for a member first!";
+                		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+                		return;
+                	}
                 	try {
             			Members.deleteMember(member);
+            			memberTextArea.setText("");
+            			member = null;
             		} catch (SQLException e) {
-            			// TODO Auto-generated catch block
+            			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             			System.out.println("Error Deleting Member: " + e.getMessage());
             			e.printStackTrace();
             		}
@@ -156,6 +155,11 @@ public class SearchMemberPanel extends JPanel {
             });
             enrollMemberBtn.addActionListener(new ActionListener(){
         		public void actionPerformed(ActionEvent e){
+        			if(member == null) {
+                		String message = "Please Search for a member first!";
+                		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+                		return;
+                	}
         			ClassDialog classDialog = new ClassDialog("Add Member to Class");
         			classDialog.setVisible(true);
         		}
@@ -168,8 +172,16 @@ public class SearchMemberPanel extends JPanel {
         					member = Members.getMemberByEmail(email);
         					if(member != null)
         					memberTextArea.setText(member.toString());
-        					else
-        					memberTextArea.setText("Member Not Found");
+        					else{
+        						
+        	                		String message = "Member Not Found";
+        	                		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+        	                		memberTextArea.setText("");
+        	                		member = null;
+        	                		return;
+        	                	
+        					}
+        					
         				} catch (SQLException e) {
         					// TODO Auto-generated catch block
         					System.out.println("Error getting Member. "+ e.getMessage());
@@ -191,6 +203,7 @@ public class SearchMemberPanel extends JPanel {
                     		return;
                     	}
                 		} catch (SQLException e) {
+                			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 			System.out.println("Error Registering Member: " + e.getMessage());
                 			e.printStackTrace();
                 		}catch(NumberFormatException e){
@@ -213,7 +226,8 @@ public class SearchMemberPanel extends JPanel {
                     .addComponent(enrollMemberBtn)
                     .addComponent(editMembershipBtn)
                     .addComponent(deleteMemberBtn)
-                    .addComponent(signupMemberBtn))
+                    .addComponent(signupMemberBtn)
+                    .addComponent(editMemberBtn))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(memberJLabel)
@@ -282,6 +296,8 @@ public class SearchMemberPanel extends JPanel {
                         .addComponent(enrollMemberBtn)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editMembershipBtn)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editMemberBtn)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteMemberBtn)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)

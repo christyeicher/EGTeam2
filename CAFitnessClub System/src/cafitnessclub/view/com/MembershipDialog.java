@@ -9,6 +9,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.LayoutStyle;
@@ -65,7 +67,7 @@ public class MembershipDialog extends JDialog {
 						Memberships.insertMembership(new Membership(member.getMemberID(), "AU", 1500, 
 	            				0));
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
 					}
             		break;
@@ -74,7 +76,7 @@ public class MembershipDialog extends JDialog {
 						Memberships.insertMembership(new Membership(member.getMemberID(), "MU", 150, 
 	            				0));
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
 					}
             		break;
@@ -83,7 +85,7 @@ public class MembershipDialog extends JDialog {
 						Memberships.insertMembership(new Membership(member.getMemberID(), "MC", 80, 
 	            				0));
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
 					}
             		break;
@@ -101,7 +103,7 @@ public class MembershipDialog extends JDialog {
             			membership.setCost(1500);
 						Memberships.updateMembership(membership);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
 					}
             		break;
@@ -112,7 +114,7 @@ public class MembershipDialog extends JDialog {
             			membership.setCost(150);
 						Memberships.updateMembership(membership);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
 					}
             		break;
@@ -123,7 +125,7 @@ public class MembershipDialog extends JDialog {
             			membership.setCost(80);
 						Memberships.updateMembership(membership);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
 					}
             		break;
