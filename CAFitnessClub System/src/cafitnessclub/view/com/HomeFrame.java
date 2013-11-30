@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,6 +40,7 @@ public class HomeFrame extends JFrame {
     JButton viewMemberInfoButton;
     ClassesTable table;
     JScrollPane spTable;
+    ClassDialog dialog;
 	
 	public HomeFrame()
 	{
@@ -53,32 +56,31 @@ public class HomeFrame extends JFrame {
 	public void initComponents()
 	{   
         spTable.setPreferredSize(new Dimension(400,300));
-        final ClassDialog dialog = new ClassDialog("TEST");
-      
-     // MOUSE LISTENER
-        table.addMouseListener(new MouseAdapter(){
-        	public void mouseClicked(MouseEvent e) {
-                int row = table.rowAtPoint(e.getPoint());
-                int column = table.columnAtPoint(e.getPoint());
-                if (row >= 0 && column >= 0) {
-                	int temp = (int) table.getModel().getValueAt(row, 0);
-                	System.out.println("CLASSID: " + temp);
-                	dialog.setInfo(temp);                	
-                    dialog.setVisible(true);
-                }
-            }        	
-        });
-      // END MOUSE LISTENER
         
       // TAB PANE DECLARATIONS
         JTabbedPane tabbedPane = new JTabbedPane();
         ImageIcon icon = createImageIcon("res/FitnessClubLogo.gif");
 
         JComponent classesPanel = new JPanel(new BorderLayout()); //makeTextPanel("Panel #1");
-        	classesPanel.add(new ClassButtonsPanel(), BorderLayout.NORTH);
-        	//classesPanel.add(new ClassesPanel(), BorderLayout.CENTER);
+        ClassButtonsPanel classBtnPanel = new ClassButtonsPanel();
+        final ClassesPanel classesTablePanel = new ClassesPanel();
+        
+        classesPanel.add(classBtnPanel, BorderLayout.NORTH);
+        classesPanel.add(classesTablePanel, BorderLayout.CENTER);
         tabbedPane.addTab("Classes", icon, classesPanel, "Currently offered classes");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+        
+        classBtnPanel.getRefreshBtn().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				classesTablePanel.getTable().ResetiarTable();
+				classesTablePanel.revalidate();
+				classesTablePanel.repaint();
+				
+			}
+		});
 
         JComponent membersPanel = new MembersPanel(); //makeTextPanel("Panel #2");
         tabbedPane.addTab("Members & Memberships", icon, membersPanel, "Edit member accounts and memberships");

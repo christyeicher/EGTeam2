@@ -160,8 +160,8 @@ public class SearchMemberPanel extends JPanel {
                 		JOptionPane.showMessageDialog(new JFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
                 		return;
                 	}
-        			ClassDialog classDialog = new ClassDialog("Add Member to Class");
-        			classDialog.setVisible(true);
+        			EnrollInClassDialog enrollDialog = new EnrollInClassDialog("Enroll In Class", member);
+        			enrollDialog.setVisible(true);
         		}
         	});
         	searchBtn.addActionListener(new ActionListener(){

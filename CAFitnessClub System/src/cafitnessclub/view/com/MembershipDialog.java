@@ -101,7 +101,8 @@ public class MembershipDialog extends JDialog {
             			Membership membership = member.getMembership();
             			membership.setMembershipType("AU");
             			membership.setCost(1500);
-						Memberships.updateMembership(membership);
+            			Memberships.deleteMembership(membership);
+						Memberships.insertMembership(membership);
 					} catch (SQLException e) {
 						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
@@ -112,7 +113,8 @@ public class MembershipDialog extends JDialog {
             			Membership membership = member.getMembership();
             			membership.setMembershipType("MU");
             			membership.setCost(150);
-						Memberships.updateMembership(membership);
+            			Memberships.deleteMembership(membership);
+						Memberships.insertMembership(membership);
 					} catch (SQLException e) {
 						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();
@@ -123,7 +125,8 @@ public class MembershipDialog extends JDialog {
             			Membership membership = member.getMembership();
             			membership.setMembershipType("MC");
             			membership.setCost(80);
-						Memberships.updateMembership(membership);
+            			Memberships.deleteMembership(membership);
+						Memberships.insertMembership(membership);
 					} catch (SQLException e) {
 						JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						e.printStackTrace();

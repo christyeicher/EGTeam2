@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import cafitnessclub.model.POJO.com.ClassObject;
 import cafitnessclub.model.POJO.com.Enrollment;
 import cafitnessclub.model.POJO.com.Member;
 
@@ -28,17 +29,18 @@ public class Enrollments {
 	//Insert
 	
 	
-	//Select Queries
+
 	 public static void insertEnrollment(Enrollment enrollment) throws SQLException
 	   {
 		   PreparedStatement st = null;
-		   ResultSet rs = null;
+		  // ResultSet rs = null;
 		   String sqlQuery =
-				   "INSERT into Enrollment (memberID, classID) values (?, ?)";
+				   "INSERT into Enrollment (e_memberID, e_classID) values (?, ?)";
 		   
 		   st = Database.getConnection().prepareStatement(sqlQuery);
-		  // st.setString(1, enrollment.getMember.get);
-		   rs = st.executeQuery();
+		   st.setInt(1, enrollment.getMemberID());
+		   st.setInt(2, enrollment.getClassID());
+		   st.execute();
 		   
 	   }
 	 
@@ -58,14 +60,6 @@ public class Enrollments {
 	            stmt.setString(5, member.getAddress());
 	            stmt.execute();
 	         
-//	         } finally {
-//	            try {
-//	               if (stmt != null)
-//	                  stmt.close();
-//	            } catch (SQLException se) {
-//	               se.printStackTrace();
-//	            }
-//	         }
 	      }
 
 	   

@@ -101,6 +101,7 @@ public class AddClassDialog extends JDialog {
             	//ClassObject newClass = new ClassObject("", null, new Time(06, 00, 00), null, null);
             	System.out.println(instructorCombo.getSelectedItem().toString());
             	dispose();
+            	
             }
         });
         cancelButton.addActionListener(new ActionListener() {

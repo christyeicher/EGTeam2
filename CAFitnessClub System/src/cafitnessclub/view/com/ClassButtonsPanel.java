@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.LayoutStyle;
 
 public class ClassButtonsPanel extends JPanel {
@@ -21,6 +23,9 @@ public class ClassButtonsPanel extends JPanel {
     private JLabel viewScheduleLabel;
     private JButton refreshButton;
     private ClassesPanel classesPanel;
+    private JButton deleteClassButton;
+    private JScrollPane jScrollPane1;
+    private JTextArea displayArea;
 
     public ClassButtonsPanel() {
         initComponents();
@@ -42,19 +47,23 @@ public class ClassButtonsPanel extends JPanel {
 	        buttonGroup1.add(instructorRadioBtn);
 	        buttonGroup1.add(roomRadioBtn);
 	    refreshButton = new JButton();
-	    	refreshButton.setText("Refresh");
+	    	refreshButton.setText("Refresh List");
+	    deleteClassButton = new JButton();
+	    	deleteClassButton.setText("Delete A Class");
+	    jScrollPane1 = new JScrollPane();
+	    displayArea = new JTextArea();
+	    	displayArea.setEditable(false);
+	        displayArea.setColumns(20);
+	        displayArea.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+	        displayArea.setRows(1);
+	        jScrollPane1.setViewportView(displayArea);
         	
       // ACTION LISTENERS
         	addClassButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    AddClassDialog addClassDialog;
-					try {
-						addClassDialog = new AddClassDialog("Add New Class");
-						addClassDialog.setVisible(true);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}                    
+                    ClassDialog addClassDialog;
+					addClassDialog = new ClassDialog("Add New Class");
+					addClassDialog.setVisible(true);                    
                 }
             });
         	refreshButton.addActionListener(new ActionListener() {
@@ -63,6 +72,12 @@ public class ClassButtonsPanel extends JPanel {
                     	 System.out.println();
                      else if (roomRadioBtn.isSelected())
                     	 System.out.println();
+                }
+            });
+        	deleteClassButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    DeleteClassDialog deleteDialog = new DeleteClassDialog("Delete A Class");
+                    deleteDialog.setVisible(true);
                 }
             });
       // END ACTION LISTENERS
@@ -74,35 +89,37 @@ public class ClassButtonsPanel extends JPanel {
             layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(124, 124, 124)
+                    //.addGap(97, 97, 97)
+                	.addGap(250,250,250)
                     .addComponent(addClassButton)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
-                    .addComponent(viewScheduleLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(instructorRadioBtn)
-                        .addComponent(roomRadioBtn))
-                    .addGap(18, 18, 18)
+//                    .addGap(48, 48, 48)
+//                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(30, 30, 30)
+                    .addComponent(deleteClassButton)
+                    .addGap(30, 30, 30)
                     .addComponent(refreshButton)
-                    .addGap(68, 68, 68))
+                    .addContainerGap(145, Short.MAX_VALUE))
             );
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(23, 23, 23)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(addClassButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(instructorRadioBtn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(roomRadioBtn))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(13, 13, 13)
-                            .addComponent(viewScheduleLabel))
-                        .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(deleteClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+//                            .addGroup(layout.createSequentialGroup()
+//                                .addContainerGap()
+//                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(addClassButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addContainerGap(39, Short.MAX_VALUE))
             );
       // END ADD ALL COMPONENTS
+    }
+    
+    public JButton getRefreshBtn(){
+    	return this.refreshButton;
     }
 }
 

@@ -3,7 +3,9 @@ package cafitnessclub.model.com;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import cafitnessclub.model.POJO.com.ClassObject;
 import cafitnessclub.model.POJO.com.Member;
 import cafitnessclub.model.POJO.com.Membership;
 
@@ -33,6 +35,22 @@ public class Members {
 		return null;
 	}
 	
+	private static ArrayList<Member> createMembers(ResultSet rs) throws SQLException{
+		ArrayList<Member> members = new ArrayList<Member>();
+		while(rs.next())
+		{
+			Member member = new Member (
+					rs.getInt("memberID"),
+					rs.getString("name"),
+					rs.getString("email"));
+			
+			
+			members.add(member);
+			
+		}
+		return members;
+			
+	}
 	//Select Queries
 	 	public static Member getMemberByEmail(String email) throws SQLException
 	   {
@@ -66,15 +84,23 @@ public class Members {
 	            stmt.setInt(6, member.getMemberID());
 	            stmt.execute();
 	         
-//	         } finally {
-//	            try {
-//	               if (stmt != null)
-//	                  stmt.close();
-//	            } catch (SQLException se) {
-//	               se.printStackTrace();
-//	            }
-//	         }
 	      }
+	   
+	   public static ArrayList<Member> getClassRoster(int classID) throws SQLException{
+		
+			 PreparedStatement st = null;
+			 ResultSet rs = null;
+			   String sqlQuery =
+					   "SELECT * from Member, Enrollment where Enrollment.e_classID = ? "
+					   + "AND Member.memberID = Enrollment.e_memberID";
+			  
+			   st = Database.getConnection().prepareStatement(sqlQuery);
+			   st.setInt(1, classID);
+			   rs = st.executeQuery();
+			   return createMembers(rs);
+			
+			
+		}
 	   
 	// Delete
 		public static void deleteMember(Member member) throws SQLException

@@ -31,7 +31,7 @@ import cafitnessclub.model.com.Classes;
 import cafitnessclub.model.com.Instructors;
 import cafitnessclub.model.com.Rooms;
 
-public class ClassDialog extends JDialog {
+public class EditClassDialog extends JDialog {
 	
     private JButton cancelButton;
     private JLabel classTypeLabel;
@@ -48,8 +48,10 @@ public class ClassDialog extends JDialog {
     private JLabel startTimeLabel;
     private Instructor[] instructors;
     private Room[] rooms;
+    private int classID;
 
-    public ClassDialog(String title){
+    public EditClassDialog(String title, int classID){
+    	this.classID = classID;
         setTitle(title);
         initComponents();
         setLocationRelativeTo(null);
@@ -99,6 +101,14 @@ public class ClassDialog extends JDialog {
         	rooms = Rooms.getAllRooms();
         	String[] roomNames = Rooms.getAllRoomNames();
         	roomCombo.setModel(new DefaultComboBoxModel<String>(roomNames));
+        	
+        	
+        	ClassObject clase = Classes.getClass(classID);
+        	instructorCombo.setSelectedItem(clase.getInstructor().getName());
+        	roomCombo.setSelectedItem(clase.getRoom().getRoomName().toString());
+        	startTimeCombo.setSelectedItem(clase.getStartTime().toString());
+        	endTimeCombo.setSelectedItem(clase.getEndTime().toString());
+        	classTypeCombo.setSelectedItem(clase.getName());
         }catch (SQLException e){
         	System.out.println(e.getMessage());
         	e.printStackTrace();
@@ -117,10 +127,11 @@ public class ClassDialog extends JDialog {
             	
             	
             	
-            	ClassObject newClass = new ClassObject(classType, startTime, endTime, instructor, room);
+            	ClassObject newClass = new ClassObject(classID, classType, startTime, endTime, instructor, room);
             	
             	try {
-					Classes.addClass(newClass, instructor, room);
+            		Classes.updateClass(newClass, instructor, room);
+					//Classes.addClass(newClass, instructor, room);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

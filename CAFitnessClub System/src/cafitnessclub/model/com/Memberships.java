@@ -50,13 +50,12 @@ public class Memberships {
 		public static void deleteMembership(Membership membership) throws SQLException
 		{
 			PreparedStatement st = null;
-			 ResultSet rs = null;
 			 String sqlQuery =
-					   "DELETE from Membership where memberID = ?";
+					   "DELETE from Membership where m_memberID = ?";
 			   
 			 st = Database.getConnection().prepareStatement(sqlQuery);
 			 st.setInt(1, membership.getMemberID());
-			 rs = st.executeQuery();
+			 st.execute();
 			
 		}
 		//Select Queries

@@ -27,6 +27,42 @@ public class Instructors {
 			return null;
 		}
 		
+		private static Instructor[] returnInstructorArray(ResultSet rs) throws SQLException
+		{
+			Instructor[] instructors = new Instructor[50];
+			int i = 0;
+			while(rs.next())
+			{					
+				Instructor instructor = new Instructor(
+						rs.getInt("instructorID"),
+						rs.getString("name"),
+						rs.getString("email"),
+						rs.getString("address"));
+				
+				instructors[i] = instructor;
+				i++;
+			}
+			return instructors;
+		}		
+		
+		private static String[] returnInstructorNames(ResultSet rs) throws SQLException
+		{
+			String[] instructors = new String[50];
+			int i = 0;
+			while(rs.next())
+			{					
+				Instructor instructor = new Instructor(
+						rs.getInt("instructorID"),
+						rs.getString("name"),
+						rs.getString("email"),
+						rs.getString("address"));
+				
+				instructors[i] = instructor.toNameString();
+				i++;
+			}
+			return instructors;
+		}
+		
 	//Select 		
 		public static Instructor getInstructorById(int id) throws SQLException
 		   {
@@ -54,24 +90,6 @@ public class Instructors {
 			   return createInstructor(rs);			   
 		   }
 		
-		private static Instructor[] returnInstructors(ResultSet rs) throws SQLException
-		{
-			Instructor[] instructors = new Instructor[50];
-			int i = 0;
-			while(rs.next())
-			{					
-				Instructor instructor = new Instructor(
-						rs.getInt("instructorID"),
-						rs.getString("name"),
-						rs.getString("email"),
-						rs.getString("address"));
-				
-				instructors[i] = instructor;
-				i++;
-			}
-			return instructors;
-		}
-		
 		public static Instructor[] getAllInstructors() throws SQLException{
 			   Statement st = null;
 			   ResultSet rs = null;
@@ -80,7 +98,18 @@ public class Instructors {
 			   
 			   st = Database.getConnection().prepareStatement(sqlQuery);
 			   rs = st.executeQuery(sqlQuery);
-			   return returnInstructors(rs);
+			   return returnInstructorArray(rs);
+		}
+		
+		public static String[] getAllInstructorNames() throws SQLException{
+			Statement st = null;
+			   ResultSet rs = null;
+			   String sqlQuery =
+					   "SELECT * from Instructor";
+			   
+			   st = Database.getConnection().prepareStatement(sqlQuery);
+			   rs = st.executeQuery(sqlQuery);
+			   return returnInstructorNames(rs);
 		}
 	
 	// Update
@@ -92,9 +121,9 @@ public class Instructors {
 	            // update record
 	            stmt = Database.getConnection().prepareStatement(updateString);
 	            stmt.setString(1, instructor.getName());
-	            stmt.setString(4, instructor.getEmail());
-	            stmt.setString(5, instructor.getAddress());
-	            stmt.setInt(6, instructor.getInstructorID());
+	            stmt.setString(2, instructor.getEmail());
+	            stmt.setString(3, instructor.getAddress());
+	            stmt.setInt(4, instructor.getInstructorID());
 	            stmt.execute();
 		}
 		

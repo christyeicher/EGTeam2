@@ -10,17 +10,14 @@ import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
 
-public class ClassesTable extends JTable {
+public class ClassRosterTable extends JTable {
 	//Needs Header
 	JTableHeader header;
-	MyTableModel model;
+	RosterTableModel model;
 	
-	public ClassesTable()
+	public ClassRosterTable(int classID)
 	{
-		//header =  new JTableHeader();
-		//header.setTable(this);
-		super();
-		model = new MyTableModel();
+		model = new RosterTableModel(classID);
 		this.setModel(model);
 	
 		this.setSize(new Dimension(450, 400));
@@ -28,9 +25,9 @@ public class ClassesTable extends JTable {
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 	}
 	
-	public void ResetiarTable(){
+	/*public void ResetiarTable(){
 		model.resetClasses(2);
 		model.fireTableDataChanged();
 		this.setModel(model);
-	}
+	}*/
 }

@@ -28,6 +28,15 @@ public class Member {
 		this.address = address;
 	}
 	
+	
+	
+	public Member(int memberID, String name, String email) {
+		
+		this.memberID = memberID;
+		this.name = name;
+		this.email = email;
+	}
+
 	public int getMemberID() {
 		return memberID;
 	}

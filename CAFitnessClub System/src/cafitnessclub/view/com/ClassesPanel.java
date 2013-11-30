@@ -13,6 +13,8 @@ public class ClassesPanel extends JPanel{
 	
 	private ClassesTable table;
 	private JScrollPane spTable;
+	private ClassMenuDialog dialog;
+	private int classID;
 	
 	public ClassesPanel(){
 		
@@ -20,6 +22,7 @@ public class ClassesPanel extends JPanel{
 		 table = new ClassesTable();
 	     spTable = new JScrollPane(table);
 	     spTable.setPreferredSize(new Dimension(400,300));
+	     dialog = new ClassMenuDialog("Class Menu");
 	     this.add(spTable, BorderLayout.CENTER);	
 	     
 	     initComponents();
@@ -27,19 +30,25 @@ public class ClassesPanel extends JPanel{
 	
 	private void initComponents(){
 		
-		final ClassDialog dialog = new ClassDialog("Blah");
+		//final ClassMenuDialog dialog = new ClassMenuDialog("Blah");
 		 // MOUSE LISTENER
         table.addMouseListener(new MouseAdapter(){
         	public void mouseClicked(MouseEvent e) {
                 int row = table.rowAtPoint(e.getPoint());
                 int column = table.columnAtPoint(e.getPoint());
                 if (row >= 0 && column >= 0) {
-                	int temp = (int) table.getModel().getValueAt(row, 0);
-                	System.out.println("CLASSID: " + temp);
-                	dialog.setInfo(temp);                	
-                    dialog.setVisible(true);
+                	int ID = (int) table.getModel().getValueAt(row, 0);
+                	System.out.println("CLASSID: " + ID);
+                	classID = ID;
+                	//dialog.setInfo(temp);   
+                	dialog.setClassID(ID);
+                	
+                     dialog.setVisible(true);
                 }
             }        	
         });
+	}
+	public ClassesTable getTable(){
+		return this.table;
 	}
 }
